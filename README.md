@@ -6,7 +6,7 @@
    <img width="1440" alt="Screenshot 2024-10-02 at 1 08 14 PM" src="https://github.com/user-attachments/assets/7f6fcf61-8482-468a-a196-7254e387de65">
    
 3. Created a IAM role "pk-EC2-full-access" with policies "AmazonEC2FullAccess" and "AWSLambdaBasicExecutionRole".
-<img width="1440" alt="Screenshot 2024-10-02 at 1 50 27 PM" src="https://github.com/user-attachments/assets/b2ba243b-1ee0-43a2-bbc3-2c9ed6d26c1c">
+   <img width="1440" alt="Screenshot 2024-10-02 at 1 50 27 PM" src="https://github.com/user-attachments/assets/b2ba243b-1ee0-43a2-bbc3-2c9ed6d26c1c">
 
 4. Created a lambda function "pk-EC2-auto-start-stop" with py3.10 as runtime, attached the above created role.
 5. The script to execute the lambda function is attached in the python file [lambda_auto_start_stop.py](https://github.com/prasanna-konduri/serverless_architechture/blob/main/lambda_auto_start_stop.py)
@@ -27,7 +27,9 @@
 
 3. The output for this lambda function when manually invoked is as follows.
    <img width="1440" alt="Screenshot 2024-10-03 at 4 07 06 AM" src="https://github.com/user-attachments/assets/e655d9ea-9852-47b8-86c3-133f552ba8de">
+   
    <img width="1440" alt="Screenshot 2024-10-03 at 4 13 27 AM" src="https://github.com/user-attachments/assets/66fea9c3-82d3-45f2-91fb-9932ce49be03">
+   
    <img width="1440" alt="Screenshot 2024-10-03 at 4 15 27 AM" src="https://github.com/user-attachments/assets/21b4e7a4-35fd-4845-b549-263d6a616799">
 
 
