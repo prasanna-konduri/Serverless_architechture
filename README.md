@@ -26,7 +26,7 @@
 2. Python code for fetching the latest snapshot and creating an EC2 instance is in [restore_instance.py](https://github.com/prasanna-konduri/serverless_architechture/blob/main/restore_instance.py)
 
 3. The output for this lambda function when manually invoked is as follows.
-   <img width="1440" alt="Screenshot 2024-10-03 at 4 07 06 AM" src="https://github.com/user-attachments/assets/e655d9ea-9852-47b8-86c3-133f552ba8de">
+   <img width="1440" alt="Screenshot 2024-10-03 at 12 02 07 PM" src="https://github.com/user-attachments/assets/58096284-9741-4554-8233-1a9f7759e430">
    
    <img width="1440" alt="Screenshot 2024-10-03 at 4 13 27 AM" src="https://github.com/user-attachments/assets/66fea9c3-82d3-45f2-91fb-9932ce49be03">
    
