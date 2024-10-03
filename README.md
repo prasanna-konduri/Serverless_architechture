@@ -43,10 +43,29 @@
 
 2. Created a lambda function "s3-delete-old-files" with runtime as python3.10 and attached the role created in the previous step.
 3. The boto3 and python code for the lambda function is in [cleanup_s3.py](https://github.com/prasanna-konduri/serverless_architechture/blob/main/cleanup_s3.py)
-4. the output screenshots when invoked the function manually are as follows.
+4. The output screenshots when invoked the function manually are as follows.
    <img width="1440" alt="Screenshot 2024-10-03 at 4 06 19 PM" src="https://github.com/user-attachments/assets/4a9633a2-e9f3-4ae3-b430-2d23fc0214d7">
    
    <img width="1440" alt="Screenshot 2024-10-03 at 4 05 28 PM" src="https://github.com/user-attachments/assets/f258df16-9712-4dcc-8631-35d73dcdd0e4">
+
+### Assignment 4: Automatic EBS Snapshot and Cleanup Using AWS Lambda and Boto3
+
+## Task: Automate the creation of snapshots for specified EBS volumes and clean up snapshots older than 30 days.
+
+1. Created a lambda function named "Auto_create_snapshot" with python 3.10 as runtime.
+2. Attached "pk-EC2-full-access" role to the lambda function.
+3. Login to AWS console from there navigate to EC2->EBS->volumes. Slected a volume to work with and copied the volume id.
+4. The python script for the lambda function is in the [auto_snapshot.py](https://github.com/prasanna-konduri/serverless_architechture/blob/main/auto_snapshot.py)
+5. The output of the function when mannually invoked is as follows.
+   <img width="1440" alt="Screenshot 2024-10-03 at 7 52 04 PM" src="https://github.com/user-attachments/assets/34147f78-f056-4cd0-91b1-f7cf2f784e28">
+   
+   <img width="1440" alt="Screenshot 2024-10-03 at 7 53 05 PM" src="https://github.com/user-attachments/assets/cf04b3ad-9f97-4db9-b4b8-2c5e2e5fd839">
+
+6. Additionally tried creating event bridge scheduler but couldn't create as i don't have access. The configuration given to scedular is attached below.
+   <img width="1440" alt="Screenshot 2024-10-03 at 8 13 33 PM" src="https://github.com/user-attachments/assets/2d564d84-89f0-4b29-80e3-6e399fb4a523">
+
+
+
  
 
 
