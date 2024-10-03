@@ -3,6 +3,8 @@ import boto3
 
 INSTANCEID = 'i-054ad0107db37961e'
 REGION = 'us-west-2'
+AMI_BASE_NAME = "pk_auto_stop_snapshot_AMI"
+
 
 ec2_client = boto3.client('ec2', region_name=REGION) 
 
@@ -19,8 +21,17 @@ def get_instance(instance_id):
 def get_start_time(snapshot):
     return snapshot['StartTime']
 
+def check_image_exists(ami_name):
+    response = ec2_client.describe_images(
+        Filters=[
+            {'Name': 'name', 'Values': [ami_name]},
+            {'Name': 'state', 'Values': ['available']}
+        ],
+        Owners=['self']
+    )
+    return response
 
-def create_AMI(snapshot_id, instance):
+def create_AMI(snapshot_id, instance, ami_name):
     image = ec2_client.register_image(
         Architecture = instance['Architecture'],
         VirtualizationType = instance['VirtualizationType'],
@@ -34,7 +45,7 @@ def create_AMI(snapshot_id, instance):
            }
         ],
         RootDeviceName = instance['RootDeviceName'],
-        Name = "pk-auto-stop-AMI-From-Snapshot"
+        Name = ami_name
     )
     
     return image['ImageId']
@@ -43,8 +54,8 @@ def create_AMI(snapshot_id, instance):
 def lambda_handler(event, context):
     instance = get_instance(INSTANCEID)
     volume_id = instance["BlockDeviceMappings"][0]['Ebs']['VolumeId']
-
-
+    ami_name = AMI_BASE_NAME
+    
     snapshots = ec2_client.describe_snapshots(
         Filters=[{'Name': 'volume-id', 'Values': [volume_id]}]
     )
@@ -53,7 +64,19 @@ def lambda_handler(event, context):
     
     latest_snapshot_id = latest_snapshot['SnapshotId']
     
-    ami_id = create_AMI(latest_snapshot_id,instance)
+    print(f"latest snapshot id: {latest_snapshot_id}")
+    
+    for i in range(11):
+        ami_name = AMI_BASE_NAME+str(i)
+        print(f"checking if the image exists with name: {ami_name}")
+        response = check_image_exists(ami_name)
+        if not response['Images']:
+         break
+          
+    
+    ami_id = create_AMI(latest_snapshot_id,instance,ami_name)
+    print(f'AMI created with image id: {ami_id}')
+
     
     new_instance = ec2_client.run_instances(
                 ImageId=ami_id,
